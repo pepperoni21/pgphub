@@ -1,2 +1,13 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+    import { isLoggedIn, publicKey } from "$lib/keys";
+    import { getProfileName, getProfilePicture } from "$lib/profile";
+</script>
+
+
+{#if $isLoggedIn && $publicKey}
+    Logged!
+    <img class="w-24 h-24" src="{getProfilePicture($publicKey)}" alt="">
+    <span>{getProfileName($publicKey)}</span>
+{:else}
+    Loading
+{/if}
