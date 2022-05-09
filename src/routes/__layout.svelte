@@ -4,6 +4,7 @@
     import { isLoggedIn } from "../lib/keys";
     import "../app.css";
     import { onMount } from "svelte";
+    import NavBar from "../components/NavBar.svelte";
 
     onMount(() => {
         if(!$isLoggedIn){
@@ -13,5 +14,6 @@
 </script>
 
 <div class="h-screen w-screen bg-background">
+    <NavBar />
     <slot />
 </div>

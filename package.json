@@ -36,6 +36,7 @@
     "gun": "^0.2020.1237",
     "localstorage-slim": "^2.2.0",
     "openpgp": "^5.2.1",
+    "svelte-icons": "^2.1.0",
     "unique-names-generator": "^4.7.1"
   }
 }
