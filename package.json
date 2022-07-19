@@ -33,6 +33,7 @@
   },
   "type": "module",
   "dependencies": {
+    "daisyui": "^2.19.0",
     "gun": "^0.2020.1237",
     "localstorage-slim": "^2.2.0",
     "openpgp": "^5.2.1",

@@ -2,6 +2,7 @@ import { get, writable, type Writable } from "svelte/store";
 import * as openpgp from 'openpgp';
 import ls from 'localstorage-slim';
 import { getProfilePicture } from "./profile";
+import { goto } from "$app/navigation";
 
 ls.config.encrypt = true;
 
@@ -75,4 +76,18 @@ export async function validateKeys(publicK: openpgp.Key, privateK: openpgp.Priva
         return false;
     });
     return true;
+}
+
+export function signOut(){
+    ls.remove('privateKey');
+    ls.remove('publicKey');
+    ls.remove('passphrase');
+
+    isLoggedIn.set(false);
+
+    privateKey.set(null);
+    publicKey.set(null);
+    passphrase.set(null);
+
+    goto("/login");
 }

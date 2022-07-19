@@ -4,7 +4,7 @@
     import { isLoggedIn } from "../lib/keys";
     import "../app.css";
     import { onMount } from "svelte";
-    import NavBar from "../components/NavBar.svelte";
+    import NavBar from "../components/index/NavBar.svelte";
 
     onMount(() => {
         if(!$isLoggedIn){

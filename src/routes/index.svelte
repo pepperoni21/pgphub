@@ -1,10 +1,11 @@
 <script>
-    import { isLoggedIn, publicKey } from "$lib/keys";
+    import { isLoggedIn } from "$lib/keys";
+    import Loading from "../components/index/Loading.svelte";
 </script>
 
 
 {#if $isLoggedIn}
-    Logged!
+    
 {:else}
-    Loading
+    <Loading/>
 {/if}

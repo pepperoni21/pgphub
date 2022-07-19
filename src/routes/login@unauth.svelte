@@ -3,9 +3,15 @@
     import { onMount } from "svelte";
     import { isLoggedIn, setKeys } from "../lib/keys";
 
-    let publicKey: string = "";
-    let privateKey: string = "";
-    let passphrase: string = "";
+    import LoginButton from "../components/login/LoginButton.svelte";
+    import PublicKeyArea from "../components/login/PublicKeyArea.svelte";
+    import PrivateKeyArea from "../components/login/PrivateKeyArea.svelte";
+    import PassphraseArea from "../components/login/PassphraseArea.svelte";
+    import { writable, type Writable } from "svelte/store";
+
+    let publicKey: Writable<string> = writable("");
+    let privateKey: Writable<string> = writable("");
+    let passphrase: Writable<string> = writable("");
 
     onMount(() => {
         if($isLoggedIn){
@@ -14,9 +20,9 @@
     });
 
     function login(){
-        if(publicKey.length > 0 && privateKey.length > 0){
+        if($publicKey.length > 0 && $privateKey.length > 0){
             // TODO: Check
-            setKeys(privateKey, publicKey, passphrase, true).then((value) => {
+            setKeys($privateKey, $publicKey, $passphrase, true).then((value) => {
                 if(value){
                     isLoggedIn.set(true)
                     goto("/");
@@ -29,15 +35,9 @@
 
 <div class="w-full h-full flex flex-col justify-center items-center">
     <form class="h-[32rem] w-[24rem] bg-cyan-700 rounded-3xl shadow-gray-900 shadow-md flex flex-col justify-evenly items-center">
-        <textarea type="text" placeholder="Public key" bind:value={publicKey}></textarea>
-        <textarea class="password" placeholder="Private key" bind:value={privateKey}></textarea>
-        <textarea class="password" placeholder="Passphrase" bind:value={passphrase}></textarea>
-        <button class="border-background border-2 rounded-2xl w-24 h-8" on:click|preventDefault={login}>Login</button>
+        <PublicKeyArea publicKey={publicKey}/>
+        <PrivateKeyArea privateKey={privateKey}/>
+        <PassphraseArea passphrase={passphrase}/>
+        <LoginButton login={login}/>
     </form>
 </div>
-
-<style>
-    .password {
-        -webkit-text-security: disc;
-    }
-</style>
